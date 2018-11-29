@@ -4,6 +4,9 @@
 
 #include <gtest/gtest.h>
 #include "TicTacToeBoard.h"
+
+
+using namespace std;
  
 class TicTacToeBoardTest : public ::testing::Test
 {
@@ -20,3 +23,20 @@ TEST(TicTacToeBoardTest, unitTestName)
 	ASSERT_TRUE(true);
 }
 */
+
+// check the change turn function
+TEST(TicTacToeBoardTest, testsVariousToggleTurnInput)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	Piece nextTurn;
+	
+	for( int i = 0; i < 10; i++)
+	{
+		nextTurn = board.toggleTurn();
+		ASSERT_NE(turn, Invalid);
+		ASSERT_NE(turn, nextTurn);	
+		
+	}
+	
+}
