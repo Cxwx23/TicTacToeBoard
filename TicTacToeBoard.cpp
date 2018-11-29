@@ -44,8 +44,26 @@ Piece TicTacToeBoard::toggleTurn()
 **/ 
 Piece TicTacToeBoard::placePiece(int row, int column)
 {
+  int i = column;
+  int j = row;
   
-  return Invalid;
+  if(i >= BOARDSIZE || i < 0 || j >= BOARDSIZE || j < 0)
+  {
+    return Invalid;
+  }
+  else if(board[i][j] == X || board[i][j] == O)
+  {
+    return board[i][j];
+  }
+  else
+  {
+    if(board[i][j] == Blank)
+    {
+      board[i][j] = turn;
+      
+    }
+    return turn; 
+  }
 }
 
 /**
@@ -54,8 +72,18 @@ Piece TicTacToeBoard::placePiece(int row, int column)
 **/
 Piece TicTacToeBoard::getPiece(int row, int column)
 {
+  int i = column;
+  int j = row;
   
-  return Invalid;
+  if(i >= BOARDSIZE || i < 0 || j >= BOARDSIZE || j < 0)
+  {
+    return Invalid;
+  }
+  else
+  {
+    return board[i][j]; 
+  }
+  
 }
 
 /**
@@ -64,5 +92,79 @@ Piece TicTacToeBoard::getPiece(int row, int column)
 **/
 Piece TicTacToeBoard::getWinner()
 {
-  return Invalid;
+  int oCount = 0;
+  int xCount = 0;
+  int oCountD = 0;
+  int xCountD = 0;
+  
+  //  check for rows
+  for(int i = 0; i < BOARDSIZE; i++)
+  {
+    for(int j = 0; j < BOARDSIZE; j++)
+    {
+      if(board[i][j] == O)
+        oCount++;
+      if(board[i][j] == X)
+        xCount++;
+    }
+    
+    if(oCount >= 2)
+      return O;
+    if(xCount >= 2)
+      return X;
+      
+    oCount = 0;
+    xCount = 0;
+  }
+  
+  //  check for columns
+  for(int j = 0; j < BOARDSIZE; j++)
+  {
+    for(int i = 0; i < BOARDSIZE; i++)
+    {
+      if(board[i][j] == O)
+        oCount++;
+      if(board[i][j] == X)
+        xCount++;
+    }
+    
+    if(oCount >= 2)
+      return O;
+    if(xCount >= 2)
+      return X;
+      
+    oCount = 0;
+    xCount = 0;
+  }
+  
+  
+  // check diagonals
+  for(int i=0; i<BOARDSIZE; i++)
+  {
+    for(int j=0; j<BOARDSIZE; j++)
+    {
+      if(i == j)
+      {
+        if(board[i][j] == O)
+          oCount++;
+        if(board[i][j] == X)
+          xCount++;
+      }
+      
+      if(i + j == 2)
+      {
+        if(board[i][j] == O)
+          oCountD++;
+        if(board[i][j] == X)
+          xCountD++;
+      }
+    }
+  }
+  
+  if(oCount >= 2 || oCountD >=2)
+    return O;
+  if(xCount >= 2 || xCountD >=2)
+    return X;
+    
 }
+

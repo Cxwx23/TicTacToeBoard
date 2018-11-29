@@ -25,7 +25,7 @@ TEST(TicTacToeBoardTest, unitTestName)
 */
 
 // check the change turn function
-TEST(TicTacToeBoardTest, testsVariousToggleTurnInput)
+TEST(TicTacToeBoardTest, ToggleTurnTest)
 {
 	TicTacToeBoard board;
 	Piece turn;
@@ -40,3 +40,18 @@ TEST(TicTacToeBoardTest, testsVariousToggleTurnInput)
 	}
 	
 }
+
+TEST(TicTacToeBoardTest, placePieceTestForOutOfBounds)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	
+	for( int i = -2; i < 5; i++)
+	{
+		for(int j = -2; j < 5; j++)
+		{
+			ASSERT_NE(turn, Invalid);	
+		}
+	}
+}
+
