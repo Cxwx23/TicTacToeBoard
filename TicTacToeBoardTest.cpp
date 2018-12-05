@@ -41,17 +41,194 @@ TEST(TicTacToeBoardTest, ToggleTurnTest)
 	
 }
 
-TEST(TicTacToeBoardTest, placePieceTestForOutOfBounds)
+TEST(TicTacToeBoardTest, placePieceOutOfBoundsRow)
 {
 	TicTacToeBoard board;
 	Piece turn;
 	
-	for( int i = -2; i < 5; i++)
-	{
-		for(int j = -2; j < 5; j++)
-		{
-			ASSERT_NE(turn, Invalid);	
-		}
-	}
+	turn = board.placePiece(3, 2);
+	ASSERT_EQ(turn, Invalid);
 }
 
+TEST(TicTacToeBoardTest, placePieceOutOfBoundsCol)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	
+	turn = board.placePiece(2, 3);
+	ASSERT_EQ(turn, Invalid);
+}
+
+
+TEST(TicTacToeBoardTest, placePieceOutOfBoundsNegative)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	
+	turn = board.placePiece(-1, -1);
+	ASSERT_EQ(turn, Invalid);
+}
+
+
+TEST(TicTacToeBoardTest, placePieceInBounds)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	
+	turn = board.placePiece(2, 2);
+	ASSERT_NE(turn, Invalid);
+}
+
+TEST(TicTacToeBoardTest, getPieceOutOfBoundsRow)
+{
+	TicTacToeBoard board;
+	//Piece turn;
+	Piece gotten;
+	
+	//turn = board.placePiece(3, 2);
+	gotten = board.getPiece(3, 2);
+	ASSERT_EQ(gotten, Invalid);
+}
+
+TEST(TicTacToeBoardTest, getPieceOutOfBoundsCol)
+{
+	TicTacToeBoard board;
+	//Piece turn;
+	Piece gotten;
+	
+	
+	//turn = board.placePiece(2, 3);
+	gotten = board.getPiece(2, 3);
+	ASSERT_EQ(gotten, Invalid);
+}
+
+
+TEST(TicTacToeBoardTest, getPieceInBounds)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	Piece gotten;
+	
+	turn = board.placePiece(2, 2);
+	gotten = board.getPiece(2, 2);
+	ASSERT_EQ(turn, gotten);
+}
+
+TEST(TicTacToeBoardTest, getWinnerXrow)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	Piece winner;
+	
+	turn = board.placePiece(0, 0);
+	turn = board.placePiece(0, 1);
+	turn = board.placePiece(0, 2);
+	
+	winner = board.getWinner();
+	ASSERT_EQ(turn, winner);
+}
+
+TEST(TicTacToeBoardTest, getWinnerXcol)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	Piece winner;
+	
+	turn = board.placePiece(0, 0);
+	turn = board.placePiece(1, 0);
+	turn = board.placePiece(2, 0);
+	
+	winner = board.getWinner();
+	ASSERT_EQ(turn, winner);
+}
+
+TEST(TicTacToeBoardTest, getWinnerXdiag)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	Piece winner;
+	
+	turn = board.placePiece(0, 0);
+	turn = board.placePiece(1, 1);
+	turn = board.placePiece(2, 2);
+	
+	winner = board.getWinner();
+	ASSERT_EQ(turn, winner);
+}
+
+
+TEST(TicTacToeBoardTest, getWinnerXdiag2)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	Piece winner;
+	
+	turn = board.placePiece(0, 2);
+	turn = board.placePiece(1, 1);
+	turn = board.placePiece(2, 0);
+	
+	winner = board.getWinner();
+	ASSERT_EQ(turn, winner);
+}
+
+
+TEST(TicTacToeBoardTest, getWinnerOrow)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	Piece winner;
+	
+	turn = board.toggleTurn();
+	turn = board.placePiece(0, 0);
+	turn = board.placePiece(0, 1);
+	turn = board.placePiece(0, 2);
+	
+	winner = board.getWinner();
+	ASSERT_EQ(turn, winner);
+}
+
+TEST(TicTacToeBoardTest, getWinnerOcol)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	Piece winner;
+	
+	turn = board.toggleTurn();
+	turn = board.placePiece(0, 0);
+	turn = board.placePiece(1, 0);
+	turn = board.placePiece(2, 0);
+	
+	winner = board.getWinner();
+	ASSERT_EQ(turn, winner);
+}
+
+
+TEST(TicTacToeBoardTest, getWinnerOdiag)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	Piece winner;
+	
+	turn = board.toggleTurn();
+	turn = board.placePiece(0, 0);
+	turn = board.placePiece(1, 1);
+	turn = board.placePiece(2, 2);
+	
+	winner = board.getWinner();
+	ASSERT_EQ(turn, winner);
+}
+
+TEST(TicTacToeBoardTest, getWinnerOdiag2)
+{
+	TicTacToeBoard board;
+	Piece turn;
+	Piece winner;
+	
+	turn = board.toggleTurn();
+	turn = board.placePiece(0, 2);
+	turn = board.placePiece(1, 1);
+	turn = board.placePiece(2, 0);
+	
+	winner = board.getWinner();
+	ASSERT_EQ(turn, winner);
+}
